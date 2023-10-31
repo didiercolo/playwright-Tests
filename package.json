@@ -1,0 +1,19 @@
+{
+  "name": "playwright-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --ui --debug",
+    "show-report": "npx playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^8.2.0",
+    "@playwright/test": "^1.39.0",
+    "@types/node": "^20.8.10"
+  }
+}
