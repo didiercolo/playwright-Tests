@@ -11,10 +11,27 @@ test.beforeEach(async ({ page }) => {
   await todos.navigateToPage();
 });
 
-
 test.describe('Mark all as completed', () => {
 
-  test('should allow me to mark all items as completed', async ({ page }) => {
+  test('should allow me to mark all items as completed using toggle all option', async ({ page }) => {
+    const todos = new ToDos(page);
+    await todos.generateRandomTodoItems()
+    const items: Array<Locator> = await todos.listOfTodos.all()
+
+    // Complete all todos
+    await todos.toggleAll.click()
+
+    // Assert all elements are
+    items.forEach((item) => {
+      expect(item.locator('.toggle')).toBeChecked();
+    });
+
+
+    // Assert no more items are left
+    await expect(todos.todoCount).toHaveText(['0']);
+  });
+
+  test('should allow me to mark all items as completed by clicking 1 by 1', async ({ page }) => {
     const todos = new ToDos(page);
     await todos.generateRandomTodoItems()
     const items: Array<Locator> = await todos.listOfTodos.all()
@@ -62,7 +79,7 @@ test.describe('Mark all as completed', () => {
     await todos.addItemToTodoList(todoItem)
 
     // Add more todos
-     await todos.generateRandomTodoItems()
+    await todos.generateRandomTodoItems()
 
     const item = await todos.findTodoByName(todoItem)
 

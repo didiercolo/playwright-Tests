@@ -9,6 +9,9 @@ export class ToDos {
     readonly pageTitle: Locator;
     readonly clearCompletedButton: Locator;
     readonly completedTab: Locator;
+    readonly toggleAll: Locator;
+    readonly inputEdit: Locator;
+    readonly deleteItem: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -18,6 +21,9 @@ export class ToDos {
         this.pageTitle = page.locator('h1');
         this.clearCompletedButton = page.locator('button.clear-completed');
         this.completedTab = page.getByRole('link', { name: 'Completed' })
+        this.toggleAll = page.locator('label[for="toggle-all"]');
+        this.inputEdit = page.locator('.edit');
+        this.deleteItem = page.locator('button.destroy');
     }
 
     async navigateToPage() {
@@ -61,7 +67,7 @@ export class ToDos {
 
     async findTodoByName(itemText: string) {
         const items: Array<Locator> = await this.listOfTodos.all()
-    
+
         for (let i = 0; i < items.length; i++) {
             if (await items[i].textContent() === itemText) {
 
