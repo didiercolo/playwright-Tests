@@ -27,23 +27,18 @@ test.describe('Edit items', () => {
     const items: Array<Locator> = await todos.listOfTodos.all()
 
     // validate Item can be edited
-    items.forEach(async (item) => {
-      await item.dblclick()
+    for (let i = 0; i < items.length; i++) {
+      await items[i].dblclick()
 
-      const editInput: Locator = await item.locator(todos.inputEdit)
+      const editInput: Locator = await items[i].locator(todos.inputEdit)
       await expect(editInput).toBeVisible
       await editInput.clear()
       await editInput.fill(newText)
       await editInput.press('Enter');
 
       // Validate todo was updated
-      await expect(item).toHaveText(newText);
-    });
-
-
-
-
-
+      await expect(items[i]).toHaveText(newText);
+    };
   });
 
 });

@@ -22,9 +22,9 @@ test.describe('Mark all as completed', () => {
     await todos.toggleAll.click()
 
     // Assert all elements are
-    items.forEach((item) => {
-      expect(item.locator('.toggle')).toBeChecked();
-    });
+    for (let i = 0; i < items.length; i++) {
+      expect(items[i].locator('.toggle')).toBeChecked();
+    };
 
 
     // Assert no more items are left

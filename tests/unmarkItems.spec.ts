@@ -26,9 +26,9 @@ test.describe('Unmark items', () => {
     await todos.toggleAll.click()
 
     // Assert all elements are toogled
-    items.forEach((item) => {
-      expect(item.locator('.toggle')).toBeChecked();
-    });
+    for (let i = 0; i < items.length; i++) {
+      expect(items[i].locator('.toggle')).toBeChecked();
+    };
 
     const item = await todos.findTodoByName(todoItem)
 
@@ -36,7 +36,7 @@ test.describe('Unmark items', () => {
     if (item) {
       await item.locator('.toggle').uncheck();
       // Assert no more items are left
-      expect(item.locator('.toggle')).not.toBeChecked();
+     await expect(item.locator('.toggle')).not.toBeChecked();
     }
   });
 

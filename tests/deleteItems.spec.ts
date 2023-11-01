@@ -26,12 +26,12 @@ test.describe('Delete items', () => {
     const items: Array<Locator> = await todos.listOfTodos.all()
 
     // validate Item can be edited
-    items.forEach(async (item) => {
-      const deleteButton: Locator = await item.locator(todos.deleteItem)
+    for (let i = 0; i < items.length; i++) {
+      const deleteButton: Locator = await items[i].locator(todos.deleteItem)
 
       // Hover the element
-      await expect(item).toBeVisible
-      await item.hover()
+      await expect(items[i]).toBeVisible
+      await items[i].hover()
 
       // Expect delete button is visible
       await expect(deleteButton).toBeVisible
@@ -40,14 +40,8 @@ test.describe('Delete items', () => {
       await deleteButton.click()
       
       // Validate todo is not longer visible
-      await expect(item).not.toBeVisible
-      await expect(item).toHaveCount(0)
-    });
-
-
-
-
-
+      await expect(items[i]).not.toBeVisible
+      await expect(items[i]).toHaveCount(0)
+    };
   });
-
 });

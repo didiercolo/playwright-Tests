@@ -56,7 +56,7 @@ test.describe('New Todo', () => {
     const newTodo = page.getByPlaceholder('What needs to be done?');
 
     // Add 1st item to the ToDo list.
-    todos.addItemToTodoList(items[0])
+   await  todos.addItemToTodoList(items[0])
 
     // Check that input is empty.
     await expect(todos.todoInput).toBeEmpty();
